@@ -26,7 +26,7 @@ https://github.com/0LNetworkCommunity/libra-framework/settings/actions/runners/n
 ### Run the container in detached mode
 `docker run --privileged -v /var/run/docker.sock:/var/run/docker.sock -e GH_TOKEN=$GH_TOKEN -e GH_OWNER=$GH_OWNER -e GH_REPOSITORY=$GH_REPOSITORY -d docker-git-runner-ol-network`
 ### Check the logs
-docker logs idhere
+docker logs --follow idhere
 
 ### OR: Run the container in interactive mode
 `docker run --privileged -v /var/run/docker.sock:/var/run/docker.sock -e GH_TOKEN=$GH_TOKEN -e GH_OWNER=$GH_OWNER -e GH_REPOSITORY=$GH_REPOSITORY -ti docker-git-runner-ol-network /bin/bash`
