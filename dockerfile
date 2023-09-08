@@ -35,6 +35,19 @@ RUN service docker start
 #RUN docker run -d -v /var/run/docker.sock:/var/run/docker.sock hello-world
 #RUN docker run hello-world
 
+# rust dependencies
+RUN apt-get install -qy git vim zip unzip jq build-essential cmake clang llvm libgmp-dev secure-delete pkg-config libssl-dev lld tmux
+RUN rustup self uninstall -y && \ 
+	rm -rf ~/.cargo ~/.rustup && \
+	unset RUSTC_WRAPPER && \
+	unset RUSTC_WORKSPACE_WRAPPER && \
+	sudo apt remove rustc && \
+	curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly -y && \
+	source "$HOME/.cargo/env" && \
+	rustup default nightly && rustup update && \
+	cd ~ && cargo install toml-cli --force
+
+
 # install the packages and dependencies along with jq so we can parse JSON (add additional packages as necessary)
 RUN apt-get install -y --no-install-recommends \
     curl nodejs wget unzip vim git azure-cli jq build-essential libssl-dev libffi-dev python3 python3-venv python3-dev python3-pip
