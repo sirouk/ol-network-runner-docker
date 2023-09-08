@@ -37,12 +37,8 @@ RUN service docker start
 
 # rust dependencies
 RUN apt-get install -qy git vim zip unzip jq build-essential cmake clang llvm libgmp-dev secure-delete pkg-config libssl-dev lld tmux
-RUN rustup self uninstall -y && \ 
-	rm -rf ~/.cargo ~/.rustup && \
-	unset RUSTC_WRAPPER && \
-	unset RUSTC_WORKSPACE_WRAPPER && \
-	sudo apt remove rustc && \
-	curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly -y && \
+RUN rm -rf ~/.cargo ~/.rustup && \
+	curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y && \
 	source "$HOME/.cargo/env" && \
 	rustup default nightly && rustup update && \
 	cd ~ && cargo install toml-cli --force
