@@ -1,5 +1,6 @@
 # base image
-FROM ubuntu:20.04
+#FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 #input GitHub runner version argument
 ARG RUNNER_VERSION
@@ -39,9 +40,7 @@ RUN service docker start
 RUN apt-get install -qy git vim zip unzip jq build-essential cmake clang llvm libgmp-dev secure-delete pkg-config libssl-dev lld tmux
 RUN rm -rf ~/.cargo ~/.rustup && \
 	curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y && \
-	source "$HOME/.cargo/env" && \
-	rustup default nightly && rustup update && \
-	cd ~ && cargo install toml-cli --force
+	. ~/.bashrc && cargo install toml-cli --force
 
 
 # install the packages and dependencies along with jq so we can parse JSON (add additional packages as necessary)
